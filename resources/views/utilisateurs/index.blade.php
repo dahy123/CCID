@@ -32,7 +32,7 @@
                     <div class="alert alert-success rounded-0">{{ session('success') }}</div>
                 @endif
 
-                <div class="table-responsive small">
+                <div class="table-responsive small d-none">
                     <table class="table table-striped table-border fs-6">
                         <thead>
                             <tr>
@@ -70,7 +70,31 @@
                     </table>
                 </div>
 
-
+                <div class="d-flex flex-wrap gap-4 justify-content-around mb-5 pb-5">
+                    @foreach ($utilisateurs as $utilisateur)
+                        <div class="d-flex flex-column text-center justify-content-between shadow p-4">
+                            <div class="mb-3">
+                                @if ($utilisateur->image)
+                                    <img class="" src="{{ asset('storage/' . $utilisateur->image) }}"
+                                        alt="Image de {{ $utilisateur->nom }}" class="img-thumbnail"
+                                        style="width: 230px; height: auto;">
+                                @else
+                                    <span>Aucune image</span>
+                                @endif
+                            </div>
+                            <div>
+                                <h3 class="mb-2">{{ $utilisateur->pseudo }}</h3>
+                                <h6 class="mb-3">{{ $utilisateur->email }}</h6>
+                                <div class="d-flex justify-content-center gap-3">
+                                    <a class="btn btn-sm btn-info rounded-0"
+                                        href="/utilisateurs/{{ $utilisateur->id }}/edit">Mod</a>
+                                    <a class="btn btn-sm btn-danger rounded-0"
+                                        href="/utilisateurs/{{ $utilisateur->id }}/destroy">Sup</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </main>
 
         </div>
