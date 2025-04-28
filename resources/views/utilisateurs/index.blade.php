@@ -79,7 +79,8 @@
                                         alt="Image de {{ $utilisateur->nom }}" class="img-thumbnail"
                                         style="width: 230px; height: auto;">
                                 @else
-                                    <span>Aucune image</span>
+                                    <img src="{{ asset('storage/images/' . 'default.png') }}" alt="Photo de default"
+                                        style="width: 230px; height: auto;">
                                 @endif
                             </div>
                             <div>

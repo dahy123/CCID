@@ -20,7 +20,11 @@ class Operateurs extends Model
         'nif',
         'stat',
         'rc',
+        'activites_id'
     ];
 
+    public function activites(){
+        return $this->belongsTo(Activites::class);
+    }
 
 }

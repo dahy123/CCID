@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('operateurs', function (Blueprint $table) {
             $table->id();
-            $table->string('photo'); // Mettre à jour
+            $table->string('photo')->nullable(); // Mettre à jour
             $table->string('nom');
             $table->string('adresse');
             $table->string('contact');
@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string('type'); // Mettre à jour 
             $table->string('raison');  
             $table->string('formel'); // Mettre à jour 
-            $table->string('nif');
-            $table->string('stat');
-            $table->string('rc');
+            $table->string('nif')->nullable();
+            $table->string('stat')->nullable();
+            $table->string('rc')->nullable();
+            $table->integer('activites_id')->default('1');
             $table->timestamps();
         });
     }

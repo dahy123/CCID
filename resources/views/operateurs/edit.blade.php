@@ -64,19 +64,31 @@
                                 value="{{ $operateur->type }}">
                         </div>
                         <div class="mb-3 w-50">
+                            <label class="mb-1" for="activites_id">Secteur d'activité</label>
+                            <select class="form-select rounded-0" name="activites_id" id="activites_id" required>
+                                {{-- <option value="{{ $operateur->activites_id }}">{{ $activite-> }}</option> --}}
+                                @foreach ($activites as $activite)
+                                    <option value="{{ $activite->id }}">{{ $activite->nom }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between gap-4">
+                        <div class="mb-3 w-50">
                             <label class="mb-1" for="raison">Raison</label>
                             <input class="form-control rounded-0 " type="text" name="raison" id="raison" required
                                 value="{{ $operateur->raison }}">
                         </div>
-                    </div>
+                        <div class="mb-3 w-50">
+                            <label class="mb-1" for="formel">Formel</label>
+                            <select class="form-select rounded-0" name="formel" id="formel" required>
+                                <option value="{{ $operateur->formel }}" selected>{{ $operateur->formel }}</option>
+                                <option value="formel">Formel</option>
+                                <option value="Informel">Informel</option>
+                            </select>
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="mb-1" for="formel">Formel</label>
-                        <select class="form-select rounded-0" name="formel" id="formel" required>
-                            <option value="{{ $operateur->formel }}" selected>{{ $operateur->formel }}</option>
-                            <option value="1">Formel</option>
-                            <option value="0">Informel</option>
-                        </select>
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between gap-4">
@@ -97,9 +109,13 @@
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-center justify-content-center   gap-4 border-top  pt-4 mt-2">
-                        <input class="btn btn-outline-secondary px-md-4 rounded-0 " type="submit" value="Enregistrer">
-                        <a class="btn btn-secondary px-md-4 d-none" href="/operateurs">Annuler</a>
+                    <div class="d-flex align-items-center justify-content-center gap-4 border-top pt-4 mt-2">
+                        <button class="btn btn-outline-secondary px-md-4 rounded-0" type="submit">
+                            <i class="bi bi-save"></i> Enregistrer
+                        </button>
+                        <a class="btn btn-secondary px-md-4 " href="/operateurs">
+                            <i class="bi bi-x-circle"></i> Annuler
+                        </a>
                     </div>
 
                 </form>

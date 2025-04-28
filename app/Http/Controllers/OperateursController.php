@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activites;
 use App\Models\Operateurs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 // use Barryvdh\DomPDF\Facade as PDF;
-use Barryvdh\DomPDF\Facade\Pdf ;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OperateursController extends Controller
 {
@@ -15,6 +16,7 @@ class OperateursController extends Controller
      */
     public function index()
     {
+
         $operateurs = Operateurs::all(); // Récupère tous les opérateurs
         return view("operateurs.index", compact("operateurs")); // Retourne la vue avec les données
     }
@@ -24,7 +26,8 @@ class OperateursController extends Controller
      */
     public function create()
     {
-        return view("operateurs.create"); // Retourne la vue de création
+        $activites = Activites::all();
+        return view("operateurs.create", compact("activites")); // Retourne la vue de création
     }
 
     /**
@@ -40,6 +43,7 @@ class OperateursController extends Controller
             'contact' => 'required|string|max:20',
             'email' => 'required|email|max:255', // Validation pour un email valide
             'type' => 'required|string|max:50',
+            'activites_id' => 'required',
             'raison' => 'required|string|max:255',
             'formel' => 'required',
             'nif' => 'nullable|string|max:50',
@@ -74,8 +78,9 @@ class OperateursController extends Controller
      */
     public function edit(string $id)
     {
+        $activites = Activites::all();
         $operateur = Operateurs::findOrFail($id); // Récupère l'opérateur par son ID
-        return view('operateurs.edit', compact('operateur')); // Retourne la vue d'édition
+        return view('operateurs.edit', compact('operateur','activites')); // Retourne la vue d'édition
     }
 
     /**
@@ -149,6 +154,6 @@ class OperateursController extends Controller
 
 
         // Télécharger le fichier PDF
-        return $pdf->download('Operateur-' . $operateur->id .'-'. $operateur->nom. '.pdf');
+        return $pdf->download('Operateur-' . $operateur->id . '-' . $operateur->nom . '.pdf');
     }
 }

@@ -59,17 +59,27 @@
                             <input class="form-control rounded-0 " type="text" name="type" id="type" required>
                         </div>
                         <div class="mb-3 w-50">
-                            <label class="mb-1" for="raison">Raison</label>
-                            <input class="form-control rounded-0 " type="text" name="raison" id="raison" required>
+                            <label class="mb-1" for="activites_id">Secteur d'activité</label>
+                            <select class="form-select rounded-0" name="activites_id" id="activites_id" >
+                                @foreach ($activites as $activite)
+                                    <option value="{{ $activite->id }}">{{ $activite->nom }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="mb-1" for="formel">Formel</label>
-                        <select class="form-select rounded-0" name="formel" id="formel" required>
-                            <option value="1">Formel</option>
-                            <option value="0">Informel</option>
-                        </select>
+                    <div class="d-flex align-items-center justify-content-between gap-4">
+                        <div class="mb-3 w-50">
+                            <label class="mb-1" for="raison">Raison</label>
+                            <input class="form-control rounded-0 " type="text" name="raison" id="raison" required>
+                        </div>
+                        <div class="mb-3 w-50">
+                            <label class="mb-1" for="formel">Formel</label>
+                            <select class="form-select rounded-0" name="formel" id="formel" required>
+                                <option value="formel">Formel</option>
+                                <option value="informel">Informel</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between gap-4">

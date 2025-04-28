@@ -18,4 +18,6 @@ class Activites extends Model
         return $this->hasMany(Operateurs::class);
     }
 
+    
+
 }
