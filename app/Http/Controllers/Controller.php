@@ -15,27 +15,35 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+
     public function dashboard()
     {
         $nombreOperateurs = Operateurs::count();
         $nombreSecteurs = Activites::count();
         $nombreVisiteurs = Visiteurs::count();
-        // $rapportParJour = Rapports::whereDate('created_at', today())->count();
-        $visiteursParJour = Visiteurs::selectRaw('DATE(created_at) as date, COUNT(*) as nombre')
-                                    ->groupBy('date')
-                                    ->get();
-        // $topSecteurs = Activites::withCount('operateurs')
-        //                       ->orderBy('activites_count', 'desc')
-        //                       ->take(5)
-        //                       ->get() ?? ['Commerciale','Aucun'];
-
+        $rapportParJour = Visiteurs::whereDate('created_at', today())->count();
+        $nombreOperateursFormels = Operateurs::where('formel', true)->count();
+        $nombreOperateursInformels = Operateurs::where('formel', false)->count();
+        $nombreActivites = Activites::count();
+        $visiteursRecents = Visiteurs::whereDate('created_at', '>=', now()->subDays(7))->count();
+        $visiteursRecentsDetails = Visiteurs::whereDate('created_at', '>=', now()->subDays(7))->get();
+        $topSecteurs = Activites::withCount('operateurs')->orderBy('operateurs_count', 'desc')->take(5)->get();
+        $operateursParType = Operateurs::select('type', \DB::raw('count(*) as total'))
+            ->groupBy('type')
+            ->pluck('total', 'type');
+    
         return view('dashboard', compact(
             'nombreOperateurs',
             'nombreSecteurs',
             'nombreVisiteurs',
-            // 'rapportParJour',
-            'visiteursParJour',
-            // 'topSecteurs'
+            'rapportParJour',
+            'nombreOperateursFormels',
+            'nombreOperateursInformels',
+            'nombreActivites',
+            'visiteursRecents',
+            'visiteursRecentsDetails',
+            'topSecteurs',
+            'operateursParType'
         ));
     }
 }

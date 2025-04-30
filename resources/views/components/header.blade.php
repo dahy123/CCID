@@ -1,5 +1,11 @@
-<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white" href="#">Company name</a>
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow px-1" data-bs-theme="dark">
+
+    <a class="navbar-brand col-md-3 col-lg-2 me-0  fs-5 " href="#">
+        <img src="{{ asset('storage/' . "images/Logo.PNG") }}" alt="Photo de Logo" 
+        class="img-fluid px-1"style="height:50px;">
+        {{-- class="img-fluid position-absolute " style="height:51px"> --}}
+        {{-- <span>Gestion CCID</span> --}}
+    </a>
 
     <ul class="navbar-nav flex-row d-md-none">
         <li class="nav-item text-nowrap">

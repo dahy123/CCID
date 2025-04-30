@@ -23,7 +23,7 @@
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h3>Visiteurs</h3>
                     <a href="visiteurs/create"
-                        class="btn  btn-outline-secondary rounded-0 d-flex align-items-center gap-1">
+                        class="btn  btn-outline-visiteurs rounded-0 d-flex align-items-center gap-1">
                         <span>Ajouter un visiteur</span>
                     </a>
                 </div>
@@ -44,7 +44,7 @@
                                 <th scope="col">Contact</th>
                                 <th scope="col">Adresse</th>
                                 <th scope="col">Motif</th>
-                                <th scope="col" class="text-end " style="padding-right: 80px;">Action</th>
+                                <th scope="col" class="text-end" style="padding-right: 80px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,11 +57,18 @@
                                     <td>{{ $visiteur->contact}}</td>
                                     <td>{{ $visiteur->adresse }}</td>
                                     <td>{{ $visiteur->motif }}</td>
-                                    <td class="text-end">
-                                        <a class="btn  btn-info rounded-0"
-                                            href="/visiteurs/{{ $visiteur->id }}/edit">Modifier</a>
-                                        <a class="btn  btn-danger rounded-0"
-                                            href="/visiteurs/{{ $visiteur->id }}/destroy">Supprimer</a>
+                                    <td class="text-md-end text-sm-center">
+                                        <a class="btn btn-sm btn-light rounded-0"
+                                            href="/visiteurs/{{ $visiteur->id }}/edit">
+                                            <i class="bi bi-pencil"></i>
+                                            <span class="d-md-inline-block d-sm-none">Modifier</span>
+                                        </a>
+                                        <a class="btn btn-sm btn-light rounded-0"
+                                            href="/visiteurs/{{ $visiteur->id }}/destroy">
+                                            <i class="bi bi-trash"></i>
+                                            <span class="d-md-inline-block d-sm-none">Supprimer</span>
+                                        </a>
+                                    </td>
                                     </td>
                                 </tr>
                             @endforeach

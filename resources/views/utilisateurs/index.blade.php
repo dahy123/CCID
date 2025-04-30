@@ -20,10 +20,10 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-4 h-100 overflow-auto" style="margin-left: 16.6667%;">
 
                 <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom">
                     <h3>Utilisateurs</h3>
                     <a href="utilisateurs/create"
-                        class="btn  btn-outline-secondary rounded-0 d-flex align-items-center gap-1">
+                        class="btn  btn-outline-dark rounded-0 d-flex align-items-center gap-1">
                         <span>Ajouter un utilisateur</span>
                     </a>
                 </div>
@@ -50,8 +50,11 @@
                                     <td>
                                         @if ($utilisateur->image)
                                             <img src="{{ asset('storage/' . $utilisateur->image) }}"
+                                                alt="Photo de {{ $utilisateur->nom }}"
+                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                            {{-- <img src="{{ asset('storage/' . $utilisateur->image) }}"
                                                 alt="Image de {{ $utilisateur->nom }}" class="img-thumbnail"
-                                                style="width: 100px; height: auto;">
+                                                style="width: 100px; height: auto;"> --}}
                                         @else
                                             <span>Aucune image</span>
                                         @endif
@@ -59,10 +62,16 @@
                                     <td>{{ $utilisateur->pseudo}}</td>
                                     <td>{{ $utilisateur->email }}</td>
                                     <td class="text-end">
-                                        <a class="btn  btn-info rounded-0"
-                                            href="/utilisateurs/{{ $utilisateur->id }}/edit">Modifier</a>
-                                        <a class="btn  btn-danger rounded-0"
-                                            href="/utilisateurs/{{ $utilisateur->id }}/destroy">Supprimer</a>
+                                        <a class="btn btn-sm btn-light rounded-0"
+                                            href="/utilisateurs/{{ $utilisateur->id }}/edit">
+                                            <i class="bi bi-pencil"></i>
+                                            <span>Modifier</span>
+                                        </a>
+                                        <a class="btn btn-sm btn-light rounded-0"
+                                            href="/utilisateurs/{{ $utilisateur->id }}/destroy">
+                                            <i class="bi bi-trash"></i>
+                                            <span>Supprimer</span>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -70,27 +79,31 @@
                     </table>
                 </div>
 
-                <div class="d-flex flex-wrap gap-4 justify-content-around mb-5 pb-5">
+                <div class="d-flex flex-wrap gap-4 justify-content-start py-4 mb-5 pb-5">
                     @foreach ($utilisateurs as $utilisateur)
                         <div class="d-flex flex-column text-center justify-content-between shadow p-4">
-                            <div class="mb-3">
+                            <div class="mb-3 px-3">
                                 @if ($utilisateur->image)
-                                    <img class="" src="{{ asset('storage/' . $utilisateur->image) }}"
+                                    <img class="rounded-circle" src="{{ asset('storage/' . $utilisateur->image) }}"
                                         alt="Image de {{ $utilisateur->nom }}" class="img-thumbnail"
-                                        style="width: 230px; height: auto;">
+                                        style="width: 140px; height: 140px; object-fit: cover;">
                                 @else
-                                    <img src="{{ asset('storage/images/' . 'default.png') }}" alt="Photo de default"
+                                    <img class="rounded-circle" src="{{ asset('storage/images/' . 'default.png') }}" alt="Photo de default"
                                         style="width: 230px; height: auto;">
                                 @endif
                             </div>
                             <div>
-                                <h3 class="mb-2">{{ $utilisateur->pseudo }}</h3>
-                                <h6 class="mb-3">{{ $utilisateur->email }}</h6>
+                                <h3 class="mb-2 text-capitalize">{{ $utilisateur->name }}</h3>
+                                <p class="mb-3">{{ $utilisateur->email }}</p>
                                 <div class="d-flex justify-content-center gap-3">
-                                    <a class="btn btn-sm btn-info rounded-0"
-                                        href="/utilisateurs/{{ $utilisateur->id }}/edit">Mod</a>
-                                    <a class="btn btn-sm btn-danger rounded-0"
-                                        href="/utilisateurs/{{ $utilisateur->id }}/destroy">Sup</a>
+                                    <a class="btn btn-sm btn-light rounded-0"
+                                        href="/utilisateurs/{{ $utilisateur->id }}/edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-light rounded-0"
+                                        href="/utilisateurs/{{ $utilisateur->id }}/destroy">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>

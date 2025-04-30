@@ -22,7 +22,7 @@
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h3>Modifier un secteur</h3>
-                    <a href="/activites" class="btn  btn-outline-secondary rounded-0 d-flex align-items-center gap-1">
+                    <a href="/activites" class="btn  btn-outline-dark rounded-0 d-flex align-items-center gap-1">
                         <span>Retour</span>
                     </a>
                 </div>
@@ -30,21 +30,21 @@
                 <form action="/activites/{{ $activite->id }}/update" method="post">
                     @csrf
 
-                    <div class="mb-3 ">
+                    <div class="form-group mb-3 ">
                         <label class="mb-1" for="nom">Nom</label>
-                        <input class="form-control rounded-0 " type="text" name="nom" id="nom" required
+                        <input class=" rounded-0 " type="text" name="nom" id="nom" required
                             value="{{ $activite->nom }}">
                     </div>
 
-                    <div class="mb-3 ">
+                    <div class="form-group mb-3 ">
                         <label class="mb-1" for="description">Description</label>
-                        <textarea class="form-control rounded-0" name="description" id="" cols="30"
+                        <textarea class="w-100 rounded-0" name="description" id="" cols="30"
                             rows="10"></textarea>
                     </div>
 
                     <div class="d-flex align-items-center justify-content-center   gap-4 border-top  pt-4 mt-2">
-                        <input class="btn btn-outline-secondary px-md-4 rounded-0 " type="submit" value="Enregistrer">
-                        <a class="btn btn-secondary px-md-4 d-none" href="/activites">Annuler</a>
+                        <input class="btn btn-outline-dark px-md-4 rounded-0 " type="submit" value="Enregistrer">
+                        <a class="btn btn-dark px-md-4 d-none" href="/activites">Annuler</a>
                     </div>
 
                 </form>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activites;
 use App\Models\Operateurs;
+use App\Notifications\NouveauOperateurRegistrer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 // use Barryvdh\DomPDF\Facade as PDF;
@@ -58,10 +59,18 @@ class OperateursController extends Controller
         }
 
         // Création de l'opérateur
-        Operateurs::create($validated);
+        $create = Operateurs::create($validated);
 
-        // Redirection avec un message de succès
-        return redirect('/operateurs')->with('success', 'L\'ajout d\'un nouvel opérateur a bien été effectué.');
+        if ($create) {
+            $operateurs = new Operateurs();
+            // Envoyer un notification  à une opérateur enregistrer
+            // Operateurs::notify(new NouveauOperateurRegistrer());
+            $operateurs->notify(new NouveauOperateurRegistrer());
+
+            // Redirection avec un message de succès
+            return redirect('/operateurs')->with('success', 'L\'ajout d\'un nouvel opérateur a bien été effectué.');
+        }
+
     }
 
     /**
@@ -80,7 +89,7 @@ class OperateursController extends Controller
     {
         $activites = Activites::all();
         $operateur = Operateurs::findOrFail($id); // Récupère l'opérateur par son ID
-        return view('operateurs.edit', compact('operateur','activites')); // Retourne la vue d'édition
+        return view('operateurs.edit', compact('operateur', 'activites')); // Retourne la vue d'édition
     }
 
     /**

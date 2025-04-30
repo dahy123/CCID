@@ -21,8 +21,7 @@
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h3>Secteurs d'activités</h3>
-                    <a href="activites/create"
-                        class="btn  btn-outline-secondary rounded-0 d-flex align-items-center gap-1">
+                    <a href="activites/create" class="btn  btn-outline-dark rounded-0 d-flex align-items-center gap-1">
                         <span>Ajouter un secteur</span>
                     </a>
                 </div>
@@ -44,14 +43,20 @@
                         <tbody>
                             @foreach ($activites as $visiteur)
                                 <tr>
-                                    <td >{{ $visiteur->id }}</td>
+                                    <td>{{ $visiteur->id }}</td>
                                     <td>{{ $visiteur->nom}}</td>
                                     <td>{{ $visiteur->description }}</td>
                                     <td class="text-end">
-                                        <a class="btn  btn-info rounded-0 "
-                                            href="/activites/{{ $visiteur->id }}/edit">Modifier</a>
-                                        <a class="btn  btn-danger rounded-0"
-                                            href="/activites/{{ $visiteur->id }}/destroy">Supprimer</a>
+                                        <a class="btn btn-sm btn-light rounded-0"
+                                            href="/activites/{{ $visiteur->id }}/edit">
+                                            <i class="bi bi-pencil"></i>
+                                            <span>Modifier</span>
+                                        </a>
+                                        <a class="btn btn-sm btn-light rounded-0"
+                                            href="/activites/{{ $visiteur->id }}/destroy">
+                                            <i class="bi bi-trash"></i>
+                                            <span>Supprimer</span>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Utilisateurs;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class UtilisateursController extends Controller
      */
     public function index()
     {
-        $utilisateurs = Utilisateurs::all();
+        $utilisateurs = User::all();
         return view("utilisateurs.index", compact("utilisateurs"));
     }
 
@@ -29,11 +30,11 @@ class UtilisateursController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             "image" => "nullable",
-            "pseudo" => "required",
+            "name" => "required",
             "email" => "required",
-            "mdp" => "required",
+            "password" => "required",
         ]);
 
         if ($request->hasFile('image')) {
@@ -41,7 +42,12 @@ class UtilisateursController extends Controller
             $validated['image'] = $imagePath;
         }
 
-        Utilisateurs::create($validated);
+        // $user=new User();
+        $validated['name'] = $request->name;
+        $validated['email'] = $request->email;
+        $validated['password'] = bcrypt($request->password);
+        User::create($validated);
+        // Utilisateurs::create($validated);
 
         return redirect("/utilisateurs")->with("success", "L'ajout d'un nouvel utilisateur a bien effectué.");
     }
@@ -51,8 +57,8 @@ class UtilisateursController extends Controller
      */
     public function show(string $id)
     {
-        $utilisateur = Utilisateurs::find($id);
-        return view("utilisateurs.show", compact("utilisateur"));
+        // $utilisateur = Utilisateurs::find($id);
+        // return view("utilisateurs.show", compact("utilisateur"));
     }
 
     /**
@@ -60,7 +66,7 @@ class UtilisateursController extends Controller
      */
     public function edit(string $id)
     {
-        $utilisateur = Utilisateurs::find($id);
+        $utilisateur = User::find($id);
         return view("utilisateurs.edit", compact("utilisateur"));
 
     }
@@ -70,13 +76,13 @@ class UtilisateursController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $utilisateur = Utilisateurs::find($id);
+        $utilisateur = User::find($id);
 
         $validated = $request->validate([
             "image" => "nullable",
-            "pseudo" => "required",
+            "name" => "required",
             "email" => "required",
-            "mdp" => "required",
+            "password" => "required",
         ]);
 
         if ($request->hasFile('image')) {
@@ -84,6 +90,9 @@ class UtilisateursController extends Controller
             $validated['image'] = $imagePath;
         }
 
+        $validated['name'] = $request->name;
+        $validated['email'] = $request->email;
+        $validated['password'] = bcrypt($request->password);
         $utilisateur->update($validated);
 
         return redirect("/utilisateurs")->with("success", "Modification d'un nouvel utilisateur a bien effectué.");
@@ -95,7 +104,7 @@ class UtilisateursController extends Controller
      */
     public function destroy(string $id)
     {
-        $utilisateur = Utilisateurs::find($id);
+        $utilisateur = User::find($id);
         $utilisateur->delete();
         return redirect("/utilisateurs")->with("success", "L'operation à bien effectué avec succès.");
 
