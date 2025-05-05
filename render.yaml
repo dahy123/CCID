@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ccid-laravel
+    env: docker
+    plan: free
+    buildCommand: |
+      docker build -t laravel-app .
+    startCommand: |
+      docker run -p 80:80 laravel-app
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true

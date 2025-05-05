@@ -105,6 +105,7 @@ class OperateursController extends Controller
             'contact' => 'required|string|max:20',
             'email' => 'required|email|max:255',
             'type' => 'required|string|max:50',
+            'activites_id' => 'required',
             'raison' => 'required|string|max:255',
             'formel' => 'required',
             'nif' => 'nullable|string|max:50',
